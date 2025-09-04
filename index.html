@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGS Dashboard - Contrôle Technique & Code de la Route</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <img src="https://www.sgs.com/-/media/sgscorp/images/corporate/sgs-logo-2.svg" alt="SGS Logo" class="logo">
+                <h3>Pilotage CT & Code</h3>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#vue-ensemble" class="nav-link active"><i class="fas fa-tachometer-alt"></i> Vue d'Ensemble</a></li>
+                <li><a href="#analyse-concurrentielle" class="nav-link"><i class="fas fa-chart-bar"></i> Analyse Concurrentielle</a></li>
+                <li><a href="#focus-sgs" class="nav-link"><i class="fas fa-bullseye"></i> Focus SGS & Modèle Éco</a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <section id="vue-ensemble" class="page active">
+                <header>
+                    <h1>Marché du Contrôle Technique & Code de la Route - Vue d'Ensemble</h1>
+                </header>
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <i class="fas fa-warehouse"></i>
+                        <div class="kpi-info">
+                            <span class="kpi-value" id="kpi-nb-centres"></span>
+                            <span class="kpi-label">Nombre de centres CT (2023)</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <i class="fas fa-chart-pie"></i>
+                        <div class="kpi-info">
+                            <span class="kpi-value" id="kpi-pdm-sgs"></span>
+                            <span class="kpi-label">Part de marché SGS</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <i class="fas fa-car"></i>
+                        <div class="kpi-info">
+                            <span class="kpi-value" id="kpi-vol-ct"></span>
+                            <span class="kpi-label">Volume de contrôles techniques (2023)</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <i class="fas fa-file-alt"></i>
+                        <div class="kpi-info">
+                            <span class="kpi-value" id="kpi-vol-code"></span>
+                            <span class="kpi-label">Volume d'examens théoriques (2023)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="charts-grid-2-1">
+                    <div class="chart-card">
+                        <h2>Répartition des parts de marché des réseaux CT (%)</h2>
+                        <canvas id="partsMarcheChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h2>Évolution du Chiffre d'Affaires du secteur CT (Mds €)</h2>
+                        <canvas id="evolutionCaChart"></canvas>
+                    </div>
+                    <div class="chart-card full-width">
+                        <h2>Maillage des principaux réseaux en France</h2>
+                        <div id="map"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="analyse-concurrentielle" class="page">
+                <header>
+                    <h1>Analyse Concurrentielle Détaillée</h1>
+                </header>
+                <div class="table-card">
+                    <h2>Tableau Comparatif des Réseaux</h2>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Critère</th>
+                                    <th>SGS (Sécuritest, Auto Sécurité)</th>
+                                    <th>DEKRA (Dekra, Norisko, Autocontrol)</th>
+                                    <th>Groupe AUTOSUR (Autosur, Autovision)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Nombre de Centres</strong></td>
+                                    <td>~ 2 000</td>
+                                    <td>~ 1 700</td>
+                                    <td>> 900 (Autosur) + Autovision</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Stratégie Marketing</strong></td>
+                                    <td>Qualité de service, accompagnement client, formation, partenariats. Stratégie double marque.</td>
+                                    <td>Expertise technique, sécurité routière (rapports annuels), innovation, engagements environnementaux.</td>
+                                    <td>Spécialisation par labels (Classic, Motosur), proximité, partenariats (assurances).</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Forces Perçues</strong></td>
+                                    <td>Leader en maillage territorial, forte notoriété des deux marques, offre de formation interne structurée.</td>
+                                    <td>Image de marque internationale forte, expertise technique reconnue, diversification des services.</td>
+                                    <td>Réseau historique bien implanté, stratégie de niche pertinente, liens avec les assurances.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Faiblesses Perçues</strong></td>
+                                    <td>Complexité de gestion de la double marque, pression pour maintenir la cohérence du réseau.</td>
+                                    <td>Potentiellement moins agile, image parfois perçue comme plus "corporate".</td>
+                                    <td>Notoriété potentiellement moindre que les deux leaders, image plus traditionnelle.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="charts-grid-1-1">
+                    <div class="chart-card">
+                        <h2>Nombre de centres par acteur</h2>
+                        <canvas id="nbCentresChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h2>Positionnement stratégique (Note /5)</h2>
+                        <canvas id="positionnementChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section id="focus-sgs" class="page">
+                <header>
+                    <h1>Performance SGS & Modèle Économique du Secteur</h1>
+                </header>
+                <div class="value-chain-card">
+                    <h2>Chaîne de Valeur Interne SGS</h2>
+                    <div class="value-chain">
+                        <div class="chain-item"><i class="fas fa-chalkboard-teacher"></i><span>Formation</span></div>
+                        <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+                        <div class="chain-item"><i class="fas fa-stamp"></i><span>Agrément & Qualité</span></div>
+                        <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+                        <div class="chain-item"><i class="fas fa-headset"></i><span>Support Technique</span></div>
+                        <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+                        <div class="chain-item"><i class="fas fa-bullhorn"></i><span>Marketing & Digital</span></div>
+                        <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+                        <div class="chain-item"><i class="fas fa-id-card"></i><span>Diversification (Cartes Grises)</span></div>
+                    </div>
+                </div>
+                <div class="charts-grid-1-1">
+                    <div class="chart-card">
+                        <h2>Structure de Coûts moyenne d'un Centre Affilié (%)</h2>
+                        <canvas id="structureCoutsChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h2>Sources de Revenus moyennes d'un Centre (%)</h2>
+                        <canvas id="sourcesRevenusChart"></canvas>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
