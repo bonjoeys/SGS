@@ -46,10 +46,20 @@
         .charts-grid-2-1, .charts-grid-1-1 { display: grid; gap: 20px; }
         .charts-grid-2-1 { grid-template-columns: 2fr 1fr; }
         .charts-grid-1-1 { grid-template-columns: 1fr 1fr; }
-        .chart-card { background-color: var(--card-bg); padding: 20px; border-radius: 8px; box-shadow: var(--shadow); }
+        
+        .chart-card {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            /* --- MODIFICATIONS IMPORTANTES --- */
+            position: relative;
+            height: 400px; 
+        }
+
         .chart-card.full-width { grid-column: 1 / -1; }
         .chart-card h2 { font-size: 1.1rem; font-weight: 500; margin-bottom: 15px; text-align: center; }
-        #map { height: 400px; width: 100%; border-radius: 8px; }
+        #map { height: 100%; width: 100%; border-radius: 8px; }
         .table-card { background-color: var(--card-bg); padding: 20px; border-radius: 8px; box-shadow: var(--shadow); margin-bottom: 30px; }
         .table-card h2 { font-size: 1.1rem; font-weight: 500; margin-bottom: 15px; }
         .table-container { overflow-x: auto; }
@@ -160,12 +170,16 @@
                 });
             });
 
-            // --- OPTIONS GLOBALES POUR LES GRAPHIQUES (DÉCLARÉES AVANT UTILISATION) ---
+            // --- OPTIONS GLOBALES POUR LES GRAPHIQUES (CORRIGÉES) ---
             const chartOptions = { 
-                responsive: true, 
-                maintainAspectRatio: false, 
-                plugins: { legend: { position: 'bottom' } }, 
-                animation: { duration: 1000, easing: 'easeInOutQuart' } 
+                responsive: true,
+                maintainAspectRatio: true, 
+                plugins: { 
+                    legend: { 
+                        position: 'bottom' 
+                    } 
+                },
+                animation: false
             };
 
             // --- DONNÉES INTÉGRÉES DIRECTEMENT DANS LE SCRIPT ---
@@ -180,7 +194,7 @@
               "sourcesRevenus": { "labels": ["Contrôles Périodiques", "Contre-Visites", "Autres"], "datasets": [{ "label": "Sources de Revenus (%)", "data": [85, 10, 5], "backgroundColor": ["#EB4D23", "#2D2D2D", "#757575"] }] }
             };
 
-            // --- INITIALISATION DES COMPOSANTS AVEC LES DONNÉES INTÉGRÉES ---
+            // --- INITIALISATION DES COMPOSANTS ---
             try {
                 initKPIs(data.kpis);
                 initPartsMarcheChart(data.partsMarcheCT);
@@ -192,7 +206,7 @@
                 initMap(data.maillageReseaux);
             } catch (error) {
                 console.error("Erreur lors de l'initialisation des composants:", error);
-                document.querySelector('.main-content').innerHTML = `<h1>Erreur d'initialisation</h1><p>Une erreur s'est produite lors de l'affichage des données.</p><p><em>Détail : ${error.message}</em></p>`;
+                document.querySelector('.main-content').innerHTML = `<h1>Erreur d'initialisation</h1><p>Une erreur s'est produite.</p><p><em>Détail : ${error.message}</em></p>`;
             }
 
             // --- FONCTIONS D'INITIALISATION ---
@@ -209,7 +223,9 @@
             function initStructureCoutsChart(d) { new Chart(document.getElementById('structureCoutsChart'), { type: 'pie', data: { labels: d.labels, datasets: d.datasets }, options: chartOptions }); }
             function initSourcesRevenusChart(d) { new Chart(document.getElementById('sourcesRevenusChart'), { type: 'bar', data: { labels: d.labels, datasets: d.datasets }, options: { ...chartOptions, plugins: { legend: { display: false } } } }); }
             function initMap(mapData) {
-                const map = L.map('map').setView([46.603354, 1.888334], 6);
+                const mapContainer = document.getElementById('map');
+                if (!mapContainer || mapContainer._leaflet_id) return; // Évite la ré-initialisation
+                const map = L.map(mapContainer).setView([46.603354, 1.888334], 6);
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' }).addTo(map);
                 if (mapData && Array.isArray(mapData)) {
                     mapData.forEach(reseau => {
