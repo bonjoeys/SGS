@@ -26,8 +26,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- Chargement des Données et Initialisation des Visualisations ---
+    // Ce chemin est correct, mais assure-toi que le fichier existe bien !
     fetch('data/donnees.json')
-       .then(response => response.json())
+       .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status} - Le fichier data/donnees.json est-il bien sur GitHub ?`);
+            }
+            return response.json();
+       })
        .then(data => {
             // Initialisation des KPIs
             initKPIs(data.kpis);
@@ -43,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Initialisation de la carte
             initMap(data.maillageReseaux);
         })
-       .catch(error => console.error("Erreur lors du chargement des données:", error));
+       .catch(error => console.error("Erreur critique lors du chargement des données:", error));
 
     // --- Fonctions d'Initialisation ---
 
@@ -74,9 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'doughnut',
             data: {
                 labels: chartData.labels,
-                datasets:,
-                    hoverOffset: 4
-                }]
+                // CORRIGÉ : La syntaxe pour les datasets a été réparée
+                datasets: chartData.datasets 
             },
             options: chartOptions
         });
@@ -88,7 +93,8 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'line',
             data: {
                 labels: chartData.labels,
-                datasets:
+                // CORRIGÉ : La syntaxe pour les datasets a été réparée
+                datasets: chartData.datasets
             },
             options: chartOptions
         });
@@ -100,8 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'bar',
             data: {
                 labels: chartData.labels,
-                datasets:,
-                }]
+                // CORRIGÉ : La syntaxe pour les datasets a été réparée
+                datasets: chartData.datasets
             },
             options: {
                ...chartOptions,
@@ -139,9 +145,8 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'pie',
             data: {
                 labels: chartData.labels,
-                datasets:,
-                    hoverOffset: 4
-                }]
+                // CORRIGÉ : La syntaxe pour les datasets a été réparée
+                datasets: chartData.datasets
             },
             options: chartOptions
         });
@@ -153,8 +158,8 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'bar',
             data: {
                 labels: chartData.labels,
-                datasets:,
-                }]
+                // CORRIGÉ : La syntaxe pour les datasets a été réparée
+                datasets: chartData.datasets
             },
             options: {
                ...chartOptions,
@@ -175,4 +180,4 @@ document.addEventListener('DOMContentLoaded', () => {
                .bindPopup(`<b>${reseau.nom}</b><br>${reseau.nbCentres} centres`);
         });
     }
-});
+}); // CORRIGÉ : Accolade et parenthèse en trop supprimées après cette ligne
