@@ -21,299 +21,53 @@
             --border-color: #E0E0E0;
             --shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--main-bg);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-
-        .dashboard-container {
-            display: flex;
-            min-height: 100vh;
-        }
-
-        .sidebar {
-            width: 260px;
-            background-color: var(--sgs-gray);
-            color: white;
-            display: flex;
-            flex-direction: column;
-            position: fixed;
-            height: 100%;
-            transition: width 0.3s;
-        }
-
-        .sidebar-header {
-            padding: 20px;
-            text-align: center;
-            border-bottom: 1px solid #444;
-        }
-
-        .logo {
-            width: 100px;
-            margin-bottom: 10px;
-        }
-
-        .sidebar-header h3 {
-            font-weight: 500;
-        }
-
-        .nav-links {
-            list-style: none;
-            margin-top: 20px;
-        }
-
-        .nav-links a {
-            display: flex;
-            align-items: center;
-            padding: 15px 20px;
-            color: white;
-            text-decoration: none;
-            transition: background-color 0.3s, border-left 0.3s;
-            border-left: 4px solid transparent;
-        }
-
-        .nav-links a:hover {
-            background-color: #444;
-        }
-
-        .nav-links a.active {
-            background-color: #1a1a1a;
-            border-left: 4px solid var(--sgs-orange);
-        }
-
-        .nav-links a i {
-            margin-right: 15px;
-            width: 20px;
-            text-align: center;
-        }
-
-        .main-content {
-            flex-grow: 1;
-            margin-left: 260px;
-            padding: 30px;
-            transition: margin-left 0.3s;
-        }
-
-        .page {
-            display: none;
-        }
-
-        .page.active {
-            display: block;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        header h1 {
-            font-size: 2rem;
-            font-weight: 500;
-            margin-bottom: 20px;
-            color: var(--sgs-gray);
-        }
-
-        .kpi-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .kpi-card {
-            background-color: var(--card-bg);
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: var(--shadow);
-            display: flex;
-            align-items: center;
-        }
-
-        .kpi-card i {
-            font-size: 2.5rem;
-            color: var(--sgs-orange);
-            margin-right: 20px;
-        }
-
-        .kpi-info .kpi-value {
-            font-size: 1.8rem;
-            font-weight: 700;
-            display: block;
-        }
-
-        .kpi-info .kpi-label {
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        .charts-grid-2-1, .charts-grid-1-1 {
-            display: grid;
-            gap: 20px;
-        }
-
-        .charts-grid-2-1 {
-            grid-template-columns: 2fr 1fr;
-        }
-
-        .charts-grid-1-1 {
-            grid-template-columns: 1fr 1fr;
-        }
-
-        .chart-card {
-            background-color: var(--card-bg);
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: var(--shadow);
-        }
-
-        .chart-card.full-width {
-            grid-column: 1 / -1;
-        }
-
-        .chart-card h2 {
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-
-        #map {
-            height: 400px;
-            width: 100%;
-            border-radius: 8px;
-        }
-
-        .table-card {
-            background-color: var(--card-bg);
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: var(--shadow);
-            margin-bottom: 30px;
-        }
-        .table-card h2 {
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin-bottom: 15px;
-        }
-        .table-container {
-            overflow-x: auto;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
-        }
-        thead th {
-            background-color: #f9f9f9;
-            font-weight: 500;
-        }
-        tbody tr:hover {
-            background-color: #f5f5f5;
-        }
-        td:first-child {
-            width: 20%;
-        }
-
-        .value-chain-card {
-            background-color: var(--card-bg);
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: var(--shadow);
-            margin-bottom: 30px;
-        }
-        .value-chain-card h2 {
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .value-chain {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        .chain-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 10px;
-        }
-        .chain-item i {
-            font-size: 2rem;
-            color: var(--sgs-orange);
-            margin-bottom: 10px;
-        }
-        .arrow {
-            font-size: 1.5rem;
-            color: #ccc;
-        }
-
-        @media (max-width: 1200px) {
-           .charts-grid-2-1, .charts-grid-1-1 {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-           .dashboard-container {
-                flex-direction: column;
-            }
-           .sidebar {
-                width: 100%;
-                height: auto;
-                position: relative;
-                flex-direction: row;
-                justify-content: space-between;
-            }
-           .sidebar-header {
-                border-bottom: none;
-            }
-           .nav-links {
-                display: flex;
-                margin-top: 0;
-            }
-           .nav-links a {
-                padding: 15px;
-                border-left: none;
-                border-bottom: 4px solid transparent;
-            }
-           .nav-links a.active {
-                border-left: none;
-                border-bottom: 4px solid var(--sgs-orange);
-            }
-           .nav-links a span {
-                display: none;
-           }
-           .nav-links a i {
-                margin-right: 0;
-           }
-           .main-content {
-                margin-left: 0;
-                padding: 20px;
-           }
-           .value-chain .arrow {
-                display: none;
-           }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', sans-serif; background-color: var(--main-bg); color: var(--text-color); line-height: 1.6; }
+        .dashboard-container { display: flex; min-height: 100vh; }
+        .sidebar { width: 260px; background-color: var(--sgs-gray); color: white; display: flex; flex-direction: column; position: fixed; height: 100%; }
+        .sidebar-header { padding: 20px; text-align: center; border-bottom: 1px solid #444; }
+        .logo { width: 100px; margin-bottom: 10px; }
+        .sidebar-header h3 { font-weight: 500; }
+        .nav-links { list-style: none; margin-top: 20px; }
+        .nav-links a { display: flex; align-items: center; padding: 15px 20px; color: white; text-decoration: none; transition: background-color 0.3s, border-left 0.3s; border-left: 4px solid transparent; }
+        .nav-links a:hover { background-color: #444; }
+        .nav-links a.active { background-color: #1a1a1a; border-left: 4px solid var(--sgs-orange); }
+        .nav-links a i { margin-right: 15px; width: 20px; text-align: center; }
+        .main-content { flex-grow: 1; margin-left: 260px; padding: 30px; }
+        .page { display: none; }
+        .page.active { display: block; animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        header h1 { font-size: 2rem; font-weight: 500; margin-bottom: 20px; color: var(--sgs-gray); }
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .kpi-card { background-color: var(--card-bg); padding: 20px; border-radius: 8px; box-shadow: var(--shadow); display: flex; align-items: center; }
+        .kpi-card i { font-size: 2.5rem; color: var(--sgs-orange); margin-right: 20px; }
+        .kpi-info .kpi-value { font-size: 1.8rem; font-weight: 700; display: block; }
+        .kpi-info .kpi-label { font-size: 0.9rem; color: #666; }
+        .charts-grid-2-1, .charts-grid-1-1 { display: grid; gap: 20px; }
+        .charts-grid-2-1 { grid-template-columns: 2fr 1fr; }
+        .charts-grid-1-1 { grid-template-columns: 1fr 1fr; }
+        .chart-card { background-color: var(--card-bg); padding: 20px; border-radius: 8px; box-shadow: var(--shadow); }
+        .chart-card.full-width { grid-column: 1 / -1; }
+        .chart-card h2 { font-size: 1.1rem; font-weight: 500; margin-bottom: 15px; text-align: center; }
+        #map { height: 400px; width: 100%; border-radius: 8px; }
+        .table-card { background-color: var(--card-bg); padding: 20px; border-radius: 8px; box-shadow: var(--shadow); margin-bottom: 30px; }
+        .table-card h2 { font-size: 1.1rem; font-weight: 500; margin-bottom: 15px; }
+        .table-container { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid var(--border-color); }
+        thead th { background-color: #f9f9f9; font-weight: 500; }
+        tbody tr:hover { background-color: #f5f5f5; }
+        td:first-child { width: 20%; }
+        .value-chain-card { background-color: var(--card-bg); padding: 20px; border-radius: 8px; box-shadow: var(--shadow); margin-bottom: 30px; }
+        .value-chain-card h2 { font-size: 1.1rem; font-weight: 500; margin-bottom: 20px; text-align: center; }
+        .value-chain { display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; }
+        .chain-item { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 10px; }
+        .chain-item i { font-size: 2rem; color: var(--sgs-orange); margin-bottom: 10px; }
+        .arrow { font-size: 1.5rem; color: #ccc; }
+        @media (max-width: 1200px) { .charts-grid-2-1, .charts-grid-1-1 { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .dashboard-container { flex-direction: column; } .sidebar { width: 100%; height: auto; position: relative; flex-direction: row; justify-content: space-between; } .sidebar-header { border-bottom: none; } .nav-links { display: flex; margin-top: 0; } .nav-links a { padding: 15px; border-left: none; border-bottom: 4px solid transparent; } .nav-links a.active { border-left: none; border-bottom: 4px solid var(--sgs-orange); } .main-content { margin-left: 0; padding: 20px; } .value-chain .arrow { display: none; } }
     </style>
-    </head>
+</head>
 <body>
     <div class="dashboard-container">
         <nav class="sidebar">
@@ -322,147 +76,63 @@
                 <h3>Pilotage CT & Code</h3>
             </div>
             <ul class="nav-links">
-                <li><a href="#vue-ensemble" class="nav-link active"><span><i class="fas fa-tachometer-alt"></i> Vue d'Ensemble</span></a></li>
-                <li><a href="#analyse-concurrentielle" class="nav-link"><span><i class="fas fa-chart-bar"></i> Analyse Concurrentielle</span></a></li>
-                <li><a href="#focus-sgs" class="nav-link"><span><i class="fas fa-bullseye"></i> Focus SGS & Modèle Éco</span></a></li>
+                <li><a href="#vue-ensemble" class="nav-link active"><i class="fas fa-tachometer-alt"></i><span> Vue d'Ensemble</span></a></li>
+                <li><a href="#analyse-concurrentielle" class="nav-link"><i class="fas fa-chart-bar"></i><span> Analyse Concurrentielle</span></a></li>
+                <li><a href="#focus-sgs" class="nav-link"><i class="fas fa-bullseye"></i><span> Focus SGS & Modèle Éco</span></a></li>
             </ul>
         </nav>
 
         <main class="main-content">
             <section id="vue-ensemble" class="page active">
-                <header>
-                    <h1>Marché du Contrôle Technique & Code de la Route - Vue d'Ensemble</h1>
-                </header>
+                <header><h1>Marché du Contrôle Technique & Code de la Route - Vue d'Ensemble</h1></header>
                 <div class="kpi-grid">
-                    <div class="kpi-card">
-                        <i class="fas fa-warehouse"></i>
-                        <div class="kpi-info">
-                            <span class="kpi-value" id="kpi-nb-centres"></span>
-                            <span class="kpi-label">Nombre de centres CT (2023)</span>
-                        </div>
-                    </div>
-                    <div class="kpi-card">
-                        <i class="fas fa-chart-pie"></i>
-                        <div class="kpi-info">
-                            <span class="kpi-value" id="kpi-pdm-sgs"></span>
-                            <span class="kpi-label">Part de marché SGS</span>
-                        </div>
-                    </div>
-                    <div class="kpi-card">
-                        <i class="fas fa-car"></i>
-                        <div class="kpi-info">
-                            <span class="kpi-value" id="kpi-vol-ct"></span>
-                            <span class="kpi-label">Volume de contrôles techniques (2023)</span>
-                        </div>
-                    </div>
-                    <div class="kpi-card">
-                        <i class="fas fa-file-alt"></i>
-                        <div class="kpi-info">
-                            <span class="kpi-value" id="kpi-vol-code"></span>
-                            <span class="kpi-label">Volume d'examens théoriques (2023)</span>
-                        </div>
-                    </div>
+                    <div class="kpi-card"><i class="fas fa-warehouse"></i><div class="kpi-info"><span class="kpi-value" id="kpi-nb-centres"></span><span class="kpi-label">Nombre de centres CT (2023)</span></div></div>
+                    <div class="kpi-card"><i class="fas fa-chart-pie"></i><div class="kpi-info"><span class="kpi-value" id="kpi-pdm-sgs"></span><span class="kpi-label">Part de marché SGS</span></div></div>
+                    <div class="kpi-card"><i class="fas fa-car"></i><div class="kpi-info"><span class="kpi-value" id="kpi-vol-ct"></span><span class="kpi-label">Volume de contrôles techniques (2023)</span></div></div>
+                    <div class="kpi-card"><i class="fas fa-file-alt"></i><div class="kpi-info"><span class="kpi-value" id="kpi-vol-code"></span><span class="kpi-label">Volume d'examens théoriques (2023)</span></div></div>
                 </div>
                 <div class="charts-grid-2-1">
-                    <div class="chart-card">
-                        <h2>Répartition des parts de marché des réseaux CT (%)</h2>
-                        <canvas id="partsMarcheChart"></canvas>
-                    </div>
-                    <div class="chart-card">
-                        <h2>Évolution du Chiffre d'Affaires du secteur CT (Mds €)</h2>
-                        <canvas id="evolutionCaChart"></canvas>
-                    </div>
-                    <div class="chart-card full-width">
-                        <h2>Maillage des principaux réseaux en France</h2>
-                        <div id="map"></div>
-                    </div>
+                    <div class="chart-card"><h2>Répartition des parts de marché des réseaux CT (%)</h2><canvas id="partsMarcheChart"></canvas></div>
+                    <div class="chart-card"><h2>Évolution du Chiffre d'Affaires du secteur CT (Mds €)</h2><canvas id="evolutionCaChart"></canvas></div>
+                    <div class="chart-card full-width"><h2>Maillage des principaux réseaux en France</h2><div id="map"></div></div>
                 </div>
             </section>
-
             <section id="analyse-concurrentielle" class="page">
-                <header>
-                    <h1>Analyse Concurrentielle Détaillée</h1>
-                </header>
+                <header><h1>Analyse Concurrentielle Détaillée</h1></header>
                 <div class="table-card">
                     <h2>Tableau Comparatif des Réseaux</h2>
                     <div class="table-container">
                         <table>
-                            <thead>
-                                <tr>
-                                    <th>Critère</th>
-                                    <th>SGS (Sécuritest, Auto Sécurité)</th>
-                                    <th>DEKRA (Dekra, Norisko, Autocontrol)</th>
-                                    <th>Groupe AUTOSUR (Autosur, Autovision)</th>
-                                </tr>
-                            </thead>
+                            <thead><tr><th>Critère</th><th>SGS (Sécuritest, Auto Sécurité)</th><th>DEKRA (Dekra, Norisko, Autocontrol)</th><th>Groupe AUTOSUR (Autosur, Autovision)</th></tr></thead>
                             <tbody>
-                                <tr>
-                                    <td><strong>Nombre de Centres</strong></td>
-                                    <td>~ 2 000</td>
-                                    <td>~ 1 700</td>
-                                    <td>> 900 (Autosur) + Autovision</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Stratégie Marketing</strong></td>
-                                    <td>Qualité de service, accompagnement client, formation, partenariats. Stratégie double marque.</td>
-                                    <td>Expertise technique, sécurité routière (rapports annuels), innovation, engagements environnementaux.</td>
-                                    <td>Spécialisation par labels (Classic, Motosur), proximité, partenariats (assurances).</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Forces Perçues</strong></td>
-                                    <td>Leader en maillage territorial, forte notoriété des deux marques, offre de formation interne structurée.</td>
-                                    <td>Image de marque internationale forte, expertise technique reconnue, diversification des services.</td>
-                                    <td>Réseau historique bien implanté, stratégie de niche pertinente, liens avec les assurances.</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Faiblesses Perçues</strong></td>
-                                    <td>Complexité de gestion de la double marque, pression pour maintenir la cohérence du réseau.</td>
-                                    <td>Potentiellement moins agile, image parfois perçue comme plus "corporate".</td>
-                                    <td>Notoriété potentiellement moindre que les deux leaders, image plus traditionnelle.</td>
-                                </tr>
+                                <tr><td><strong>Nombre de Centres</strong></td><td>~ 2 000</td><td>~ 1 700</td><td>> 900 (Autosur) + Autovision</td></tr>
+                                <tr><td><strong>Stratégie Marketing</strong></td><td>Qualité de service, accompagnement client, formation, partenariats. Stratégie double marque.</td><td>Expertise technique, sécurité routière (rapports annuels), innovation, engagements environnementaux.</td><td>Spécialisation par labels (Classic, Motosur), proximité, partenariats (assurances).</td></tr>
+                                <tr><td><strong>Forces Perçues</strong></td><td>Leader en maillage territorial, forte notoriété des deux marques, offre de formation interne structurée.</td><td>Image de marque internationale forte, expertise technique reconnue, diversification des services.</td><td>Réseau historique bien implanté, stratégie de niche pertinente, liens avec les assurances.</td></tr>
+                                <tr><td><strong>Faiblesses Perçues</strong></td><td>Complexité de gestion de la double marque, pression pour maintenir la cohérence du réseau.</td><td>Potentiellement moins agile, image parfois perçue comme plus "corporate".</td><td>Notoriété potentiellement moindre que les deux leaders, image plus traditionnelle.</td></tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <div class="charts-grid-1-1">
-                    <div class="chart-card">
-                        <h2>Nombre de centres par acteur</h2>
-                        <canvas id="nbCentresChart"></canvas>
-                    </div>
-                    <div class="chart-card">
-                        <h2>Positionnement stratégique (Note /5)</h2>
-                        <canvas id="positionnementChart"></canvas>
-                    </div>
+                    <div class="chart-card"><h2>Nombre de centres par acteur</h2><canvas id="nbCentresChart"></canvas></div>
+                    <div class="chart-card"><h2>Positionnement stratégique (Note /5)</h2><canvas id="positionnementChart"></canvas></div>
                 </div>
             </section>
-
             <section id="focus-sgs" class="page">
-                <header>
-                    <h1>Performance SGS & Modèle Économique du Secteur</h1>
-                </header>
+                <header><h1>Performance SGS & Modèle Économique du Secteur</h1></header>
                 <div class="value-chain-card">
                     <h2>Chaîne de Valeur Interne SGS</h2>
                     <div class="value-chain">
-                        <div class="chain-item"><i class="fas fa-chalkboard-teacher"></i><span>Formation</span></div>
-                        <div class="arrow"><i class="fas fa-arrow-right"></i></div>
-                        <div class="chain-item"><i class="fas fa-stamp"></i><span>Agrément & Qualité</span></div>
-                        <div class="arrow"><i class="fas fa-arrow-right"></i></div>
-                        <div class="chain-item"><i class="fas fa-headset"></i><span>Support Technique</span></div>
-                        <div class="arrow"><i class="fas fa-arrow-right"></i></div>
-                        <div class="chain-item"><i class="fas fa-bullhorn"></i><span>Marketing & Digital</span></div>
-                        <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+                        <div class="chain-item"><i class="fas fa-chalkboard-teacher"></i><span>Formation</span></div><div class="arrow"><i class="fas fa-arrow-right"></i></div>
+                        <div class="chain-item"><i class="fas fa-stamp"></i><span>Agrément & Qualité</span></div><div class="arrow"><i class="fas fa-arrow-right"></i></div>
+                        <div class="chain-item"><i class="fas fa-headset"></i><span>Support Technique</span></div><div class="arrow"><i class="fas fa-arrow-right"></i></div>
+                        <div class="chain-item"><i class="fas fa-bullhorn"></i><span>Marketing & Digital</span></div><div class="arrow"><i class="fas fa-arrow-right"></i></div>
                         <div class="chain-item"><i class="fas fa-id-card"></i><span>Diversification (Cartes Grises)</span></div>
                     </div>
                 </div>
                 <div class="charts-grid-1-1">
-                    <div class="chart-card">
-                        <h2>Structure de Coûts moyenne d'un Centre Affilié (%)</h2>
-                        <canvas id="structureCoutsChart"></canvas>
-                    </div>
-                    <div class="chart-card">
-                        <h2>Sources de Revenus moyennes d'un Centre (%)</h2>
-                        <canvas id="sourcesRevenusChart"></canvas>
-                    </div>
+                    <div class="chart-card"><h2>Structure de Coûts moyenne d'un Centre Affilié (%)</h2><canvas id="structureCoutsChart"></canvas></div>
+                    <div class="chart-card"><h2>Sources de Revenus moyennes d'un Centre (%)</h2><canvas id="sourcesRevenusChart"></canvas></div>
                 </div>
             </section>
         </main>
@@ -474,180 +144,73 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
     
-            // --- Gestion de la Navigation ---
+            // --- GESTION DE LA NAVIGATION ---
             const navLinks = document.querySelectorAll('.nav-link');
             const pages = document.querySelectorAll('.page');
-
             navLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     const targetId = link.getAttribute('href').substring(1);
-
                     navLinks.forEach(l => l.classList.remove('active'));
                     link.classList.add('active');
-
                     pages.forEach(page => {
-                        if (page.id === targetId) {
-                            page.classList.add('active');
-                        } else {
-                            page.classList.remove('active');
-                        }
+                        if (page.id === targetId) page.classList.add('active');
+                        else page.classList.remove('active');
                     });
                 });
             });
 
-            // --- Chargement des Données et Initialisation ---
-            fetch('data/donnees.json')
-               .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`Erreur HTTP ${response.status} - Le fichier data/donnees.json est introuvable.`);
-                    }
-                    return response.json();
-               })
-               .then(data => {
-                    initKPIs(data.kpis);
-                    initPartsMarcheChart(data.partsMarcheCT);
-                    initEvolutionCaChart(data.evolutionCA);
-                    initNbCentresChart(data.nombreCentresActeur);
-                    initPositionnementChart(data.positionnementStrategique);
-                    initStructureCoutsChart(data.structureCouts);
-                    initSourcesRevenusChart(data.sourcesRevenus);
-                    initMap(data.maillageReseaux);
-                })
-               .catch(error => {
-                    console.error("Erreur critique lors du chargement ou de l'initialisation:", error);
-                    document.querySelector('.main-content').innerHTML = `<h1>Erreur de chargement des données</h1><p>Le fichier <code>data/donnees.json</code> est introuvable ou contient une erreur.</p><p>Assurez-vous qu'il est bien présent sur votre dépôt GitHub dans un dossier nommé "data".</p><p><em>Détail de l'erreur : ${error.message}</em></p>`;
-                });
+            // --- DONNÉES INTÉGRÉES DIRECTEMENT DANS LE SCRIPT ---
+            const data = {
+              "kpis": { "nbCentresCT": "6 710", "partMarcheSGS": "~30-32 %", "volumeControles": "26,9 Millions", "volumeExamensCode": "2,1 Millions" },
+              "partsMarcheCT": { "labels": ["SGS", "DEKRA", "AUTOSUR", "Autres"], "datasets": [{ "label": "Part de marché", "data": [31, 25, 17.5, 18], "backgroundColor": ["#EB4D23", "#2D2D2D", "#757575", "#BDBDBD"] }] },
+              "evolutionCA": { "labels": ["2022", "2023"], "datasets": [{ "label": "Chiffre d'Affaires (Mds €)", "data": [2.2, 2.3], "borderColor": "#EB4D23", "backgroundColor": "rgba(235, 77, 35, 0.1)", "fill": true }] },
+              "maillageReseaux": [ { "nom": "SGS (Sécuritest, Auto Sécurité)", "nbCentres": 2000, "coords": [48.8566, 2.3522] }, { "nom": "DEKRA (Dekra, Norisko, Autocontrol)", "nbCentres": 1700, "coords": [45.7640, 4.8357] }, { "nom": "Groupe AUTOSUR (Autosur)", "nbCentres": 900, "coords": [44.8378, -0.5792] } ],
+              "nombreCentresActeur": { "labels": ["SGS", "DEKRA", "AUTOSUR"], "datasets": [{ "label": "Nombre de centres", "data": [2000, 1700, 900], "backgroundColor": ["#EB4D23", "#2D2D2D", "#757575"] }] },
+              "positionnementStrategique": { "labels": ["Maillage", "Notoriété", "Expertise Technique", "Marketing", "Innovation"], "datasets": [ { "label": "SGS", "data": [5, 4, 4, 3, 4], "borderColor": "#EB4D23", "backgroundColor": "rgba(235, 77, 35, 0.2)" }, { "label": "DEKRA", "data": [4, 5, 5, 4, 3], "borderColor": "#2D2D2D", "backgroundColor": "rgba(45, 45, 45, 0.2)" }, { "label": "AUTOSUR", "data": [3, 3, 3, 4, 2], "borderColor": "#757575", "backgroundColor": "rgba(117, 117, 117, 0.2)" } ] },
+              "structureCouts": { "labels": ["Masse Salariale", "Loyer", "Redevance Réseau", "Équipement", "Marketing", "Autres"], "datasets": [{ "label": "Structure de Coûts", "data": [45, 10, 7.5, 6.5, 5, 26], "backgroundColor": ["#EB4D23", "#2D2D2D", "#757575", "#BDBDBD", "#FFA726", "#42A5F5"] }] },
+              "sourcesRevenus": { "labels": ["Contrôles Périodiques", "Contre-Visites", "Autres"], "datasets": [{ "label": "Sources de Revenus (%)", "data": [85, 10, 5], "backgroundColor": ["#EB4D23", "#2D2D2D", "#757575"] }] }
+            };
 
-            // --- Fonctions d'Initialisation ---
+            // --- INITIALISATION DES COMPOSANTS AVEC LES DONNÉES INTÉGRÉES ---
+            try {
+                initKPIs(data.kpis);
+                initPartsMarcheChart(data.partsMarcheCT);
+                initEvolutionCaChart(data.evolutionCA);
+                initNbCentresChart(data.nombreCentresActeur);
+                initPositionnementChart(data.positionnementStrategique);
+                initStructureCoutsChart(data.structureCouts);
+                initSourcesRevenusChart(data.sourcesRevenus);
+                initMap(data.maillageReseaux);
+            } catch (error) {
+                console.error("Erreur lors de l'initialisation des composants:", error);
+                document.querySelector('.main-content').innerHTML = `<h1>Erreur d'initialisation</h1><p>Une erreur s'est produite lors de l'affichage des données.</p><p><em>Détail : ${error.message}</em></p>`;
+            }
 
+            // --- FONCTIONS D'INITIALISATION (ne changent pas) ---
             function initKPIs(kpis) {
                 document.getElementById('kpi-nb-centres').textContent = kpis.nbCentresCT;
                 document.getElementById('kpi-pdm-sgs').textContent = kpis.partMarcheSGS;
                 document.getElementById('kpi-vol-ct').textContent = kpis.volumeControles;
                 document.getElementById('kpi-vol-code').textContent = kpis.volumeExamensCode;
             }
-
-            const chartOptions = {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                    },
-                },
-                animation: {
-                    duration: 1000,
-                    easing: 'easeInOutQuart'
-                }
-            };
-
-            function initPartsMarcheChart(chartData) {
-                const ctx = document.getElementById('partsMarcheChart').getContext('2d');
-                new Chart(ctx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: chartData.labels,
-                        datasets: chartData.datasets
-                    },
-                    options: chartOptions
-                });
-            }
-
-            function initEvolutionCaChart(chartData) {
-                const ctx = document.getElementById('evolutionCaChart').getContext('2d');
-                new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: chartData.labels,
-                        datasets: chartData.datasets
-                    },
-                    options: chartOptions
-                });
-            }
-
-            function initNbCentresChart(chartData) {
-                const ctx = document.getElementById('nbCentresChart').getContext('2d');
-                new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: chartData.labels,
-                        datasets: chartData.datasets
-                    },
-                    options: {
-                       ...chartOptions,
-                        indexAxis: 'y',
-                        plugins: { legend: { display: false } }
-                    }
-                });
-            }
-
-            function initPositionnementChart(chartData) {
-                const ctx = document.getElementById('positionnementChart').getContext('2d');
-                new Chart(ctx, {
-                    type: 'radar',
-                    data: {
-                        labels: chartData.labels,
-                        datasets: chartData.datasets
-                    },
-                    options: {
-                       ...chartOptions,
-                        scales: {
-                            r: {
-                                angleLines: { display: true },
-                                suggestedMin: 0,
-                                suggestedMax: 5,
-                                pointLabels: { font: { size: 10 } }
-                            }
-                        }
-                    }
-                });
-            }
-
-            function initStructureCoutsChart(chartData) {
-                const ctx = document.getElementById('structureCoutsChart').getContext('2d');
-                new Chart(ctx, {
-                    type: 'pie',
-                    data: {
-                        labels: chartData.labels,
-                        datasets: chartData.datasets
-                    },
-                    options: chartOptions
-                });
-            }
-
-            function initSourcesRevenusChart(chartData) {
-                const ctx = document.getElementById('sourcesRevenusChart').getContext('2d');
-                new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: chartData.labels,
-                        datasets: chartData.datasets
-                    },
-                    options: {
-                       ...chartOptions,
-                        plugins: { legend: { display: false } }
-                    }
-                });
-            }
-
+            const chartOptions = { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } }, animation: { duration: 1000, easing: 'easeInOutQuart' } };
+            function initPartsMarcheChart(d) { new Chart(document.getElementById('partsMarcheChart'), { type: 'doughnut', data: { labels: d.labels, datasets: d.datasets }, options: chartOptions }); }
+            function initEvolutionCaChart(d) { new Chart(document.getElementById('evolutionCaChart'), { type: 'line', data: { labels: d.labels, datasets: d.datasets }, options: chartOptions }); }
+            function initNbCentresChart(d) { new Chart(document.getElementById('nbCentresChart'), { type: 'bar', data: { labels: d.labels, datasets: d.datasets }, options: { ...chartOptions, indexAxis: 'y', plugins: { legend: { display: false } } } }); }
+            function initPositionnementChart(d) { new Chart(document.getElementById('positionnementChart'), { type: 'radar', data: { labels: d.labels, datasets: d.datasets }, options: { ...chartOptions, scales: { r: { angleLines: { display: true }, suggestedMin: 0, suggestedMax: 5, pointLabels: { font: { size: 10 } } } } } }); }
+            function initStructureCoutsChart(d) { new Chart(document.getElementById('structureCoutsChart'), { type: 'pie', data: { labels: d.labels, datasets: d.datasets }, options: chartOptions }); }
+            function initSourcesRevenusChart(d) { new Chart(document.getElementById('sourcesRevenusChart'), { type: 'bar', data: { labels: d.labels, datasets: d.datasets }, options: { ...chartOptions, plugins: { legend: { display: false } } } }); }
             function initMap(mapData) {
                 const map = L.map('map').setView([46.603354, 1.888334], 6);
-
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                }).addTo(map);
-
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' }).addTo(map);
                 if (mapData && Array.isArray(mapData)) {
                     mapData.forEach(reseau => {
-                        if(reseau.coords) {
-                            L.marker(reseau.coords).addTo(map)
-                               .bindPopup(`<b>${reseau.nom}</b><br>${reseau.nbCentres} centres`);
-                        }
+                        if(reseau.coords) L.marker(reseau.coords).addTo(map).bindPopup(`<b>${reseau.nom}</b><br>${reseau.nbCentres} centres`);
                     });
                 }
             }
         });
     </script>
-    </body>
+</body>
 </html>
