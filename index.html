@@ -160,6 +160,14 @@
                 });
             });
 
+            // --- OPTIONS GLOBALES POUR LES GRAPHIQUES (DÉCLARÉES AVANT UTILISATION) ---
+            const chartOptions = { 
+                responsive: true, 
+                maintainAspectRatio: false, 
+                plugins: { legend: { position: 'bottom' } }, 
+                animation: { duration: 1000, easing: 'easeInOutQuart' } 
+            };
+
             // --- DONNÉES INTÉGRÉES DIRECTEMENT DANS LE SCRIPT ---
             const data = {
               "kpis": { "nbCentresCT": "6 710", "partMarcheSGS": "~30-32 %", "volumeControles": "26,9 Millions", "volumeExamensCode": "2,1 Millions" },
@@ -187,14 +195,13 @@
                 document.querySelector('.main-content').innerHTML = `<h1>Erreur d'initialisation</h1><p>Une erreur s'est produite lors de l'affichage des données.</p><p><em>Détail : ${error.message}</em></p>`;
             }
 
-            // --- FONCTIONS D'INITIALISATION (ne changent pas) ---
+            // --- FONCTIONS D'INITIALISATION ---
             function initKPIs(kpis) {
                 document.getElementById('kpi-nb-centres').textContent = kpis.nbCentresCT;
                 document.getElementById('kpi-pdm-sgs').textContent = kpis.partMarcheSGS;
                 document.getElementById('kpi-vol-ct').textContent = kpis.volumeControles;
                 document.getElementById('kpi-vol-code').textContent = kpis.volumeExamensCode;
             }
-            const chartOptions = { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } }, animation: { duration: 1000, easing: 'easeInOutQuart' } };
             function initPartsMarcheChart(d) { new Chart(document.getElementById('partsMarcheChart'), { type: 'doughnut', data: { labels: d.labels, datasets: d.datasets }, options: chartOptions }); }
             function initEvolutionCaChart(d) { new Chart(document.getElementById('evolutionCaChart'), { type: 'line', data: { labels: d.labels, datasets: d.datasets }, options: chartOptions }); }
             function initNbCentresChart(d) { new Chart(document.getElementById('nbCentresChart'), { type: 'bar', data: { labels: d.labels, datasets: d.datasets }, options: { ...chartOptions, indexAxis: 'y', plugins: { legend: { display: false } } } }); }
