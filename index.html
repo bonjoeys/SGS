@@ -8,13 +8,312 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    
-    <link rel="stylesheet" href="css/style.css">
-</head>
+
+    <style>
+        :root {
+            --sgs-orange: #EB4D23;
+            --sgs-gray: #2D2D2D;
+            --text-color: #333333;
+            --card-bg: #FFFFFF;
+            --main-bg: #F5F5F5;
+            --border-color: #E0E0E0;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--main-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 260px;
+            background-color: var(--sgs-gray);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100%;
+            transition: width 0.3s;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #444;
+        }
+
+        .logo {
+            width: 100px;
+            margin-bottom: 10px;
+        }
+
+        .sidebar-header h3 {
+            font-weight: 500;
+        }
+
+        .nav-links {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .nav-links a {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s, border-left 0.3s;
+            border-left: 4px solid transparent;
+        }
+
+        .nav-links a:hover {
+            background-color: #444;
+        }
+
+        .nav-links a.active {
+            background-color: #1a1a1a;
+            border-left: 4px solid var(--sgs-orange);
+        }
+
+        .nav-links a i {
+            margin-right: 15px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            margin-left: 260px;
+            padding: 30px;
+            transition: margin-left 0.3s;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: var(--sgs-gray);
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .kpi-card {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+        }
+
+        .kpi-card i {
+            font-size: 2.5rem;
+            color: var(--sgs-orange);
+            margin-right: 20px;
+        }
+
+        .kpi-info .kpi-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: block;
+        }
+
+        .kpi-info .kpi-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .charts-grid-2-1, .charts-grid-1-1 {
+            display: grid;
+            gap: 20px;
+        }
+
+        .charts-grid-2-1 {
+            grid-template-columns: 2fr 1fr;
+        }
+
+        .charts-grid-1-1 {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .chart-card {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .chart-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .chart-card h2 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        #map {
+            height: 400px;
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .table-card {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+        .table-card h2 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        .table-container {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        thead th {
+            background-color: #f9f9f9;
+            font-weight: 500;
+        }
+        tbody tr:hover {
+            background-color: #f5f5f5;
+        }
+        td:first-child {
+            width: 20%;
+        }
+
+        .value-chain-card {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+        .value-chain-card h2 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .value-chain {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .chain-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 10px;
+        }
+        .chain-item i {
+            font-size: 2rem;
+            color: var(--sgs-orange);
+            margin-bottom: 10px;
+        }
+        .arrow {
+            font-size: 1.5rem;
+            color: #ccc;
+        }
+
+        @media (max-width: 1200px) {
+           .charts-grid-2-1, .charts-grid-1-1 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+           .dashboard-container {
+                flex-direction: column;
+            }
+           .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+           .sidebar-header {
+                border-bottom: none;
+            }
+           .nav-links {
+                display: flex;
+                margin-top: 0;
+            }
+           .nav-links a {
+                padding: 15px;
+                border-left: none;
+                border-bottom: 4px solid transparent;
+            }
+           .nav-links a.active {
+                border-left: none;
+                border-bottom: 4px solid var(--sgs-orange);
+            }
+           .nav-links a span {
+                display: none;
+           }
+           .nav-links a i {
+                margin-right: 0;
+           }
+           .main-content {
+                margin-left: 0;
+                padding: 20px;
+           }
+           .value-chain .arrow {
+                display: none;
+           }
+        }
+    </style>
+    </head>
 <body>
     <div class="dashboard-container">
         <nav class="sidebar">
@@ -23,9 +322,9 @@
                 <h3>Pilotage CT & Code</h3>
             </div>
             <ul class="nav-links">
-                <li><a href="#vue-ensemble" class="nav-link active"><i class="fas fa-tachometer-alt"></i> Vue d'Ensemble</a></li>
-                <li><a href="#analyse-concurrentielle" class="nav-link"><i class="fas fa-chart-bar"></i> Analyse Concurrentielle</a></li>
-                <li><a href="#focus-sgs" class="nav-link"><i class="fas fa-bullseye"></i> Focus SGS & Modèle Éco</a></li>
+                <li><a href="#vue-ensemble" class="nav-link active"><span><i class="fas fa-tachometer-alt"></i> Vue d'Ensemble</span></a></li>
+                <li><a href="#analyse-concurrentielle" class="nav-link"><span><i class="fas fa-chart-bar"></i> Analyse Concurrentielle</span></a></li>
+                <li><a href="#focus-sgs" class="nav-link"><span><i class="fas fa-bullseye"></i> Focus SGS & Modèle Éco</span></a></li>
             </ul>
         </nav>
 
@@ -171,6 +470,184 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="js/main.js"></script>
-</body>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    
+            // --- Gestion de la Navigation ---
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href').substring(1);
+
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+
+                    pages.forEach(page => {
+                        if (page.id === targetId) {
+                            page.classList.add('active');
+                        } else {
+                            page.classList.remove('active');
+                        }
+                    });
+                });
+            });
+
+            // --- Chargement des Données et Initialisation ---
+            fetch('data/donnees.json')
+               .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Erreur HTTP ${response.status} - Le fichier data/donnees.json est introuvable.`);
+                    }
+                    return response.json();
+               })
+               .then(data => {
+                    initKPIs(data.kpis);
+                    initPartsMarcheChart(data.partsMarcheCT);
+                    initEvolutionCaChart(data.evolutionCA);
+                    initNbCentresChart(data.nombreCentresActeur);
+                    initPositionnementChart(data.positionnementStrategique);
+                    initStructureCoutsChart(data.structureCouts);
+                    initSourcesRevenusChart(data.sourcesRevenus);
+                    initMap(data.maillageReseaux);
+                })
+               .catch(error => {
+                    console.error("Erreur critique lors du chargement ou de l'initialisation:", error);
+                    document.querySelector('.main-content').innerHTML = `<h1>Erreur de chargement des données</h1><p>Le fichier <code>data/donnees.json</code> est introuvable ou contient une erreur.</p><p>Assurez-vous qu'il est bien présent sur votre dépôt GitHub dans un dossier nommé "data".</p><p><em>Détail de l'erreur : ${error.message}</em></p>`;
+                });
+
+            // --- Fonctions d'Initialisation ---
+
+            function initKPIs(kpis) {
+                document.getElementById('kpi-nb-centres').textContent = kpis.nbCentresCT;
+                document.getElementById('kpi-pdm-sgs').textContent = kpis.partMarcheSGS;
+                document.getElementById('kpi-vol-ct').textContent = kpis.volumeControles;
+                document.getElementById('kpi-vol-code').textContent = kpis.volumeExamensCode;
+            }
+
+            const chartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    },
+                },
+                animation: {
+                    duration: 1000,
+                    easing: 'easeInOutQuart'
+                }
+            };
+
+            function initPartsMarcheChart(chartData) {
+                const ctx = document.getElementById('partsMarcheChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: chartData.labels,
+                        datasets: chartData.datasets
+                    },
+                    options: chartOptions
+                });
+            }
+
+            function initEvolutionCaChart(chartData) {
+                const ctx = document.getElementById('evolutionCaChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: chartData.labels,
+                        datasets: chartData.datasets
+                    },
+                    options: chartOptions
+                });
+            }
+
+            function initNbCentresChart(chartData) {
+                const ctx = document.getElementById('nbCentresChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: chartData.labels,
+                        datasets: chartData.datasets
+                    },
+                    options: {
+                       ...chartOptions,
+                        indexAxis: 'y',
+                        plugins: { legend: { display: false } }
+                    }
+                });
+            }
+
+            function initPositionnementChart(chartData) {
+                const ctx = document.getElementById('positionnementChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: chartData.labels,
+                        datasets: chartData.datasets
+                    },
+                    options: {
+                       ...chartOptions,
+                        scales: {
+                            r: {
+                                angleLines: { display: true },
+                                suggestedMin: 0,
+                                suggestedMax: 5,
+                                pointLabels: { font: { size: 10 } }
+                            }
+                        }
+                    }
+                });
+            }
+
+            function initStructureCoutsChart(chartData) {
+                const ctx = document.getElementById('structureCoutsChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: chartData.labels,
+                        datasets: chartData.datasets
+                    },
+                    options: chartOptions
+                });
+            }
+
+            function initSourcesRevenusChart(chartData) {
+                const ctx = document.getElementById('sourcesRevenusChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: chartData.labels,
+                        datasets: chartData.datasets
+                    },
+                    options: {
+                       ...chartOptions,
+                        plugins: { legend: { display: false } }
+                    }
+                });
+            }
+
+            function initMap(mapData) {
+                const map = L.map('map').setView([46.603354, 1.888334], 6);
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+
+                if (mapData && Array.isArray(mapData)) {
+                    mapData.forEach(reseau => {
+                        if(reseau.coords) {
+                            L.marker(reseau.coords).addTo(map)
+                               .bindPopup(`<b>${reseau.nom}</b><br>${reseau.nbCentres} centres`);
+                        }
+                    });
+                }
+            }
+        });
+    </script>
+    </body>
 </html>
