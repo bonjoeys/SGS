@@ -179,5 +179,4 @@ document.addEventListener('DOMContentLoaded', () => {
             L.marker(reseau.coords).addTo(map)
                .bindPopup(`<b>${reseau.nom}</b><br>${reseau.nbCentres} centres`);
         });
-    }
-}); // CORRIGÉ : Accolade et parenthèse en trop supprimées après cette ligne
+    
